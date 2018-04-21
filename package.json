@@ -1,0 +1,11 @@
+{
+  "name": "walkdroid",
+  "version": "1.0.0",
+  "description": "Community bot for the Nefarious Discord server. Come visit us at https://discord.gg/35AYbE5",
+  "main": "bot.js",
+  "author": "Arron Reed",
+  "dependencies": {
+    "discord.io": "git://github.com/woor/discord.io.git#gateway_v6",
+    "winston": "^2.4.2"
+  }
+}
