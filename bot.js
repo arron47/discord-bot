@@ -11,12 +11,12 @@ logger.add(logger.transports.Console, {
 logger.level = 'debug';
 
 // Parse the channel message into one item
-function channelList() {
-    var channelListing = "";
-    for(i in text.channels) {
-        channelListing += text.channels[i];
+function parseJSON(array) {
+    var JSONparsed = "";
+    for(i in array) {
+        JSONparsed += array[i];
     }
-    return channelListing;
+    return JSONparsed;
 }
 // Initialize Discord Bot
 var bot = new Discord.Client({
@@ -43,11 +43,19 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: 'Pong!'
                 });
+            break;
             // !channels
             case 'channels':
                 bot.sendMessage({
                     to: channelID,
-                    message: channelList()
+                    message: parseJSON(text.channels)
+                });
+            break;
+            // !help
+            case 'help':
+                bot.sendMessage({
+                    to: channelID,
+                    message: parseJSON(text.commands)
                 });
             break;
             // Just add any case commands if you want to..

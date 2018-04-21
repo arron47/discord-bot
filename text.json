@@ -15,5 +15,12 @@
         "**#villainy-and-nonsense**: Tell some jokes! Share some memes! Have a great time!\n",
         "**#voice**: Use this channel when you want to send text between people in the voice chat!\n",
         "```Have a great time on the Nefarious server!```"
+    ],
+    "commands":
+    [
+        "```Walkdroid Commands```\n",
+        "**!help**: This menu! See what all my functions are!\n",
+        "**!channels**: See a list of all our public channels, and what they're each for!\n",
+        "**!ping**: Pong!"
     ]
 }
