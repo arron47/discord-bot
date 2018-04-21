@@ -1,13 +1,23 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
-var text = require('./text.json')
+var text = require('./text.json');
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
     colorize: true
 });
 logger.level = 'debug';
+
+// Parse the channel message into one item
+function channelList() {
+    var channelListing = "";
+    for(i in text.channels) {
+        channelListing += text.channels[i];
+    }
+    return channelListing;
+}
 // Initialize Discord Bot
 var bot = new Discord.Client({
    token: auth.token,
@@ -37,7 +47,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             case 'channels':
                 bot.sendMessage({
                     to: channelID,
-                    message: text.channels
+                    message: channelList()
                 });
             break;
             // Just add any case commands if you want to..
