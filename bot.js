@@ -1,6 +1,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
-var auth = require('./auth.json');
+var auth = process.env.auth;
 var text = require('./text.json');
 
 // Configure logger settings
