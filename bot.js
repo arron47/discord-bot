@@ -20,7 +20,7 @@ function parseJSON(array) {
 }
 // Initialize Discord Bot
 var bot = new Discord.Client({
-   token: auth.token,
+   token: auth,
    autorun: true
 });
 bot.on('ready', function (evt) {
