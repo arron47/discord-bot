@@ -30,8 +30,8 @@ bot.on('ready', function (evt) {
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Assign variables for the assignable roles
-    var speedRole = message.guild.roles.find("name", "Gotta Go Fsat");
-    var movieRole = message.guild.roles.find("name", "Movie Night");
+    var speedRole = bot.guild.roles.find("name", "Gotta Go Fsat");
+    var movieRole = bot.guild.roles.find("name", "Movie Night");
 
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
