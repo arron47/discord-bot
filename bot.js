@@ -36,9 +36,9 @@ bot.on('message', function (user, userID, channelID, message, evt) {
 
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
-    message = message.toLowerCase();
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
+        args = args.map(v => v.toLowerCase());
         var cmd = args[0];
        
         args = args.splice(1);
