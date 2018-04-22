@@ -30,8 +30,9 @@ bot.on('ready', function (evt) {
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Assign variables for the assignable roles
-    var speedRole = bot.guild.roles.find("name", "Gotta Go Fsat");
-    var movieRole = bot.guild.roles.find("name", "Movie Night");
+    var serverID = bot.values(guild).id;
+    var speedRole = bot.values(guild.roles).find(r => r.name == "Gotta Go Fsat").id;
+    var movieRole = bot.values(guild.roles).find(r => r.name == "Movie Night").id;
 
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -71,14 +72,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 switch(args[0]) {
                     // !roles speed
                     case 'speed':
-                        if(message.member.roles.has(speedRole)) {
-                            message.member.removeRole(speedRole).catch(console.error);
+                        if(user.values(roles).has(speedRole)) {
+                            bot.removeFromRole(serverID, userID, speedRole);
                             bot.sendMessage({
                                 to: channelID,
                                 message: "You've been removed from the 'Gotta Go Fsat' role!"
                             });
                         } else {
-                            message.member.addRole(speedRole).catch(console.error);
+                            bot.addToRole(serverID, userID, speedRole);
                             bot.sendMessage({
                                 to: channelID,
                                 message: "You're part of the 'Gotta Go Fsat' role now!"
@@ -87,14 +88,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     break;
                     // !roles movie
                     case 'movie':
-                    if(message.member.roles.has(movieRole)) {
-                        message.member.removeRole(movieRole).catch(console.error);
+                    if(user.values(roles).has(movieRole)) {
+                        bot.removeFromRole(serverID, userID, movieRole);
                         bot.sendMessage({
                             to: channelID,
                             message: "You've been removed from the 'Movie Night' role!"
                         });
                     } else {
-                        message.member.addRole(movieRole).catch(console.error);
+                        bot.addToRole(serverID, userID, movieRole);
                         bot.sendMessage({
                             to: channelID,
                             message: "You're part of the 'Movie Night' role now!"
