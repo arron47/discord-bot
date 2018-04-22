@@ -1,6 +1,7 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = process.env.auth;
+var serverID = process.env.serverID;
 var text = require('./text.json');
 
 // Configure logger settings
@@ -30,7 +31,6 @@ bot.on('ready', function (evt) {
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Assign variables for the assignable roles
-    var serverID = bot.values(guild).id;
     var speedRole = bot.values(guild.roles).find(r => r.name == "Gotta Go Fsat").id;
     var movieRole = bot.values(guild.roles).find(r => r.name == "Movie Night").id;
 
