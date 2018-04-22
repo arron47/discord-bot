@@ -1,7 +1,6 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = process.env.auth;
-var serverID = process.env.serverID;
 var text = require('./text.json');
 
 // Configure logger settings
@@ -21,7 +20,7 @@ function parseJSON(array) {
 }
 // Initialize Discord Bot
 var bot = new Discord.Client({
-   token: auth,
+   token: auth.token,
    autorun: true
 });
 bot.on('ready', function (evt) {
@@ -31,8 +30,9 @@ bot.on('ready', function (evt) {
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
     // Assign variables for the assignable roles
-    var speedRole = bot.values(guild.roles).find(r => r.name == "Gotta Go Fsat").id;
-    var movieRole = bot.values(guild.roles).find(r => r.name == "Movie Night").id;
+    var serverID = bot.channels[channelID].guild_id;
+    var speedRole = Object.values(bot.servers[serverID].roles).find(r => r.name == "Gotta Go Fsat").id;
+    var movieRole = Object.values(bot.servers[serverID].roles).find(r => r.name == "Movie Night").id;
 
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
@@ -65,21 +65,23 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             break;
             // !roles
             case 'roles':
-                bot.sendMessage({
-                    to: channelID,
-                    message: parseJSON(text.roles)
-                });
+                if(!args[0]){
+                    bot.sendMessage({
+                        to: channelID,
+                        message: parseJSON(text.roles)
+                    });
+                }
                 switch(args[0]) {
                     // !roles speed
                     case 'speed':
-                        if(user.values(roles).has(speedRole)) {
-                            bot.removeFromRole(serverID, userID, speedRole);
+                        if(bot.servers[serverID].members[userID].roles.includes(speedRole)) {
+                            bot.removeFromRole({serverID, userID, speedRole});
                             bot.sendMessage({
                                 to: channelID,
                                 message: "You've been removed from the 'Gotta Go Fsat' role!"
                             });
                         } else {
-                            bot.addToRole(serverID, userID, speedRole);
+                            bot.addToRole({serverID, userID, speedRole});
                             bot.sendMessage({
                                 to: channelID,
                                 message: "You're part of the 'Gotta Go Fsat' role now!"
@@ -88,14 +90,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     break;
                     // !roles movie
                     case 'movie':
-                    if(user.values(roles).has(movieRole)) {
-                        bot.removeFromRole(serverID, userID, movieRole);
+                    if(bot.servers[serverID].members[userID].roles.includes(movieRole)) {
+                        bot.removeFromRole({serverID, userID, movieRole});
                         bot.sendMessage({
                             to: channelID,
                             message: "You've been removed from the 'Movie Night' role!"
                         });
                     } else {
-                        bot.addToRole(serverID, userID, movieRole);
+                        bot.addToRole({serverID, userID, movieRole});
                         bot.sendMessage({
                             to: channelID,
                             message: "You're part of the 'Movie Night' role now!"
