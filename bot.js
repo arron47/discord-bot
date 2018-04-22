@@ -65,6 +65,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 });
             break;
             // !roles
+            case 'role':
             case 'roles':
                 if(!args[0]){
                     bot.sendMessage({
