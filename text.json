@@ -21,6 +21,15 @@
         "```Walkdroid Commands```\n",
         "**!help**: This menu! See what all my functions are!\n",
         "**!channels**: See a list of all our public channels, and what they're each for!\n",
-        "**!ping**: Pong!"
+        "**!roles**: See what self-assignable roles we have! Like opt-in mailing lists!\n",
+        "**!ping**: Pong!\n",
+        "```PM oreopizza47 with command requests! New ideas are always welcome!```"
+    ],
+    "roles":
+    [
+        "```Available Roles```\n",
+        "**Gotta Go Fsat**: Get speedrunning updates! Type `!roles speed` to get it assigned!\n",
+        "**Movie Night**: Get updates about community movie nights! Type `!roles movie` to get it assigned!\n",
+        "```PM oreopizza47 to get roles removed! Self-unassignment is in the works though!```"
     ]
 }
