@@ -75,13 +75,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     // !roles speed
                     case 'speed':
                         if(bot.servers[serverID].members[userID].roles.includes(speedRole)) {
-                            bot.removeFromRole({serverID, userID, speedRole});
+                            bot.removeFromRole({
+                                serverID: serverID, 
+                                userID: userID, 
+                                roleID: speedRole
+                            });
                             bot.sendMessage({
                                 to: channelID,
                                 message: "You've been removed from the 'Gotta Go Fsat' role!"
                             });
                         } else {
-                            bot.addToRole({serverID, userID, speedRole});
+                            bot.addToRole({
+                                serverID: serverID, 
+                                userID: userID, 
+                                roleID: speedRole
+                            });
                             bot.sendMessage({
                                 to: channelID,
                                 message: "You're part of the 'Gotta Go Fsat' role now!"
@@ -91,13 +99,21 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     // !roles movie
                     case 'movie':
                     if(bot.servers[serverID].members[userID].roles.includes(movieRole)) {
-                        bot.removeFromRole({serverID, userID, movieRole});
+                        bot.removeFromRole({
+                            serverID: serverID, 
+                            userID: userID, 
+                            roleID: movieRole
+                        });
                         bot.sendMessage({
                             to: channelID,
                             message: "You've been removed from the 'Movie Night' role!"
                         });
                     } else {
-                        bot.addToRole({serverID, userID, movieRole});
+                        bot.addToRole({
+                            serverID: serverID, 
+                            userID: userID, 
+                            roleID: movieRole
+                        });
                         bot.sendMessage({
                             to: channelID,
                             message: "You're part of the 'Movie Night' role now!"
