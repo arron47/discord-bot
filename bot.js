@@ -43,6 +43,12 @@ bot.on('message', function (user, userID, channelID, message, evt) {
        
         args = args.splice(1);
         switch(cmd) {
+            case 'ping':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'Pong!'
+                });
+            break;
             // !channels
             case 'channels':
                 bot.sendMessage({
